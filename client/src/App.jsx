@@ -7,10 +7,13 @@ import SignIn from "./pages/SignIn.jsx"
 import About from './pages/About.jsx'
 import Profile from './pages/Profile.jsx'
 
+import Nav from "./components/Nav.jsx"
+
 const App = () => {
   return (
     <div>
       <Router>
+        <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sign-up" element={<SignUp />} />
