@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import userRouter  from './routes/user.route.js';
-
+import authRouter from './routes/auth.route.js';
 dotenv.config();
 const app = express();
 
@@ -11,7 +11,7 @@ const app = express();
 app.listen(3000,()=>{
     console.log("Server is running at 3000!");
 })
-
+app.use(express.json());
 mongoose.connect(process.env.DB_KEY).then(()=>{
     console.log("Connected to Database.")
 }).catch((err)=>{
@@ -19,3 +19,4 @@ mongoose.connect(process.env.DB_KEY).then(()=>{
 })
 
 app.use('/api/user',userRouter);
+app.use('/api/auth',authRouter);
