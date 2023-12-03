@@ -1,10 +1,9 @@
 import User from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 
-export const SignUpController = async(req,res) =>{
-    const { f,l,u,e,pn,p} = req.body;
+export const SignUpController = async(req,res,next) =>{
+    const { f,l,u,e,pn,p } = req.body;
     const hashedPassword = await bcryptjs.hash(p,10);
-    try{
         const newuser = new User({
             FirstName:f,
             LastName:l,
@@ -15,16 +14,10 @@ export const SignUpController = async(req,res) =>{
         })
         try{
             await newuser.save();
-            res.status(201).send("user created");
+            res.status(201).json("user created");
         }
         catch(error)
         {
-           res.status(500).send(error);
+           next(error);
         }
     }
-    catch(error)
-    {
-        res.status(500).json(error);
-    }
-
-}
