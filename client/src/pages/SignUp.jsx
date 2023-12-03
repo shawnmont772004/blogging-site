@@ -10,10 +10,26 @@ const SignUp = () => {
       [e.target.id]:e.target.value
     });
   }
-  const handleSubmit = (e) =>{
+  const handleSubmit = async(e) =>{
     e.preventDefault();
     console.log(formData);
+    try{
+      const res = await fetch('api/auth/signup',{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(formData)
+      });
+      const data= await res.json();
+      console.log(data);
+    }
+    catch(error)
+    {
+      next(error);
+    }
   }
+
   return (
     <>
     <div className=" flex justify-center mt-12 mb-12"> 
