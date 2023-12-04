@@ -3,6 +3,7 @@ import {useState} from 'react';
 
 const SignUp = () => {
   const [formData,setFormData] = useState({});
+  const [load,setLoad]=useState(false);
 
   const handleChange = (e) =>{
     setFormData({
@@ -11,6 +12,7 @@ const SignUp = () => {
     });
   }
   const handleSubmit = async(e) =>{
+    setLoad(true);
     e.preventDefault();
     console.log(formData);
     try{
@@ -21,12 +23,18 @@ const SignUp = () => {
         },
         body:JSON.stringify(formData)
       });
-      const data= await res.json();
+      const data = await res.json();
       console.log(data);
+
+      if(data.success===false){
+        setLoad(false);
+      }
+      setLoad(false);
     }
     catch(error)
     {
-      next(error);
+      setLoad(false);
+      
     }
   }
 
@@ -42,7 +50,7 @@ const SignUp = () => {
           <input type="email" placeholder="email" className="border rounded-md p-1 border-slate-800 focus:outline-none hover:bg-opacity-80" id="e" onChange={handleChange} />
           <input type="tel" placeholder="phone number" className="border rounded-md p-1 border-slate-800 focus:outline-none hover:bg-opacity-80" id="pn" onChange={handleChange} />
           <input type="password" placeholder="password" className="border rounded-md p-1 border-slate-800 focus:outline-none hover:bg-opacity-80" id="p" onChange={handleChange} />
-          <button type="submit" className="text-white font-semibold text-sm  bg-slate-700 p-2 rounded-md border border-gray-300 hover:opacity-60">sign up</button>
+          <button type="submit" className="text-white font-semibold text-sm  bg-slate-700 p-2 rounded-md border border-gray-300 hover:opacity-60" disabled={load} >{load ? "loading..." : "sign up"}</button>
         </form>
         <div className="text-sm flex mx-auto text-red-500 gap-4 mb-4">
           <span>Have an account?</span>
@@ -55,3 +63,6 @@ const SignUp = () => {
 }
 
 export default SignUp
+
+//
+//
