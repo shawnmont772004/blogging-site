@@ -1,6 +1,6 @@
 import React from 'react'
 import {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [formData,setFormData] = useState({});
@@ -62,7 +62,7 @@ const SignUp = () => {
         </form>
         <div className="text-sm flex mx-auto text-blue-500 gap-8 mb-4">
           <span>Have an account?</span>
-          <span className="underline">sign in</span>
+          <Link to="/sign-in"><span className="underline">sign in</span></Link>
         </div>
       </div>
     </div>
