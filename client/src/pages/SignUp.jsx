@@ -1,11 +1,13 @@
 import React from 'react'
 import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [formData,setFormData] = useState({});
   const [load,setLoad]=useState(false);
   const [error,setError] =useState(null);
 
+  const navg = useNavigate();
   const handleChange = (e) =>{
     setFormData({
       ...formData,
@@ -32,6 +34,7 @@ const SignUp = () => {
         setError(data.message);
         return;
       }
+      navg('/sign-in');
       setLoad(false);
       setError(null);
     }
