@@ -3,7 +3,7 @@ import bcryptjs from "bcryptjs";
 
 export const SignUpController = async(req,res,next) =>{
     const { f,l,u,e,pn,p } = req.body;
-    const hashedPassword = await bcryptjs.hash(p,10);
+    const hashedPassword = await bcryptjs.hashSync(p,10);
         const newuser = new User({
             FirstName:f,
             LastName:l,
