@@ -4,6 +4,7 @@ import {useState} from 'react';
 const SignUp = () => {
   const [formData,setFormData] = useState({});
   const [load,setLoad]=useState(false);
+  const [error,setError] =useState(null);
 
   const handleChange = (e) =>{
     setFormData({
@@ -28,13 +29,16 @@ const SignUp = () => {
 
       if(data.success===false){
         setLoad(false);
+        setError(data.message);
+        return;
       }
       setLoad(false);
+      setError(null);
     }
     catch(error)
     {
       setLoad(false);
-      
+      setError(error.message);
     }
   }
 
@@ -51,8 +55,9 @@ const SignUp = () => {
           <input type="tel" placeholder="phone number" className="border rounded-md p-1 border-slate-800 focus:outline-none hover:bg-opacity-80" id="pn" onChange={handleChange} />
           <input type="password" placeholder="password" className="border rounded-md p-1 border-slate-800 focus:outline-none hover:bg-opacity-80" id="p" onChange={handleChange} />
           <button type="submit" className="text-white font-semibold text-sm  bg-slate-700 p-2 rounded-md border border-gray-300 hover:opacity-60" disabled={load} >{load ? "loading..." : "sign up"}</button>
+          <div>{error && <p className="text-sm text-red-500 p-1">{error}</p>}</div>
         </form>
-        <div className="text-sm flex mx-auto text-red-500 gap-4 mb-4">
+        <div className="text-sm flex mx-auto text-blue-500 gap-8 mb-4">
           <span>Have an account?</span>
           <span className="underline">sign in</span>
         </div>
