@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-
+import { useNavigate } from 'react-router-dom';
 const SignIn = () => {
 
   const [formData, setFormData] = useState();
+
+  const navg=useNavigate();
 
   const handleChange =(e)=>{
     setFormData({
@@ -30,6 +32,7 @@ const SignIn = () => {
     {
       return data.message
     }
+    navg('/');
     
    }
    catch(error)
