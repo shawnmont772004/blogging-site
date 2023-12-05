@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 const SignIn = () => {
 
   const [formData, setFormData] = useState();
+  const [error,setError]=useState(null);
 
   const navg=useNavigate();
 
@@ -30,14 +31,15 @@ const SignIn = () => {
     
     if(data.success === false)
     {
-      return data.message
+      return setError(data.message);
     }
     navg('/');
+    setError(null);
     
    }
    catch(error)
    {
-    return error.message;
+    return setError(error.message);
    }
 
   }
@@ -52,10 +54,12 @@ const SignIn = () => {
           <input type="password" placeholder="password" className="border rounded-md p-1 border-slate-800 focus:outline-none hover:bg-opacity-80" onChange={handleChange} id="p" />
           <button type="submit" className="text-white font-semibold text-sm  bg-slate-700 p-2 rounded-md border border-gray-300 hover:opacity-60">sign in</button>
         </form>
-        <div className="text-sm flex mx-auto text-red-500 gap-4 mb-4">
+        <div className="text-sm flex mx-auto text-red-500 gap-2">
           <span>Don't have an account?</span>
           <span className="underline">sign up</span>
         </div>
+        <div className="flex mx-auto mb-4">{error && <p className="text-red-700 text-sm ">{error}</p>}</div>
+        
       </div>
     </div>
     </>
