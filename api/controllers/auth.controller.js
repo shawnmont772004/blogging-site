@@ -30,7 +30,7 @@ export const SignInController = async(req,res,next) => {
         const validUser= await User.findOne({EMail:e});
         if(!validUser)
         {
-            return res.status(404).json("invalid user");
+            next(errorHandler(404," Invalid User"));
         }
         else{
             const validPassword = await bcryptjs.compareSync(p,validUser.Password);
@@ -39,8 +39,6 @@ export const SignInController = async(req,res,next) => {
                 }
                 else{
                     res.status(200).json("user logged in succesfully");
-                    
-
                 } 
             }
     }
