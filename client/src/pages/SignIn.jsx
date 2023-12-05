@@ -4,6 +4,7 @@ const SignIn = () => {
 
   const [formData, setFormData] = useState();
   const [error,setError]=useState(null);
+  const [loading, setLoading]=useState(false);
 
   const navg=useNavigate();
 
@@ -16,6 +17,7 @@ const SignIn = () => {
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
+    setLoading(true);
     console.log(formData);
 
    try{
@@ -31,15 +33,19 @@ const SignIn = () => {
     
     if(data.success === false)
     {
-      return setError(data.message);
+      setLoading(false);
+;      return setError(data.message);
+      
     }
     navg('/');
-    setError(null);
+    return setError(null);
+    setLoading(false);
     
    }
    catch(error)
    {
     return setError(error.message);
+    setLoading(false);
    }
 
   }
@@ -52,7 +58,7 @@ const SignIn = () => {
         <form className="flex mx-auto flex-col w-64 gap-4" onSubmit= { handleSubmit } >
           <input type="email" placeholder="email" className="border rounded-md p-1 border-slate-800 focus:outline-none hover:bg-opacity-80" onChange={handleChange} id="e" />
           <input type="password" placeholder="password" className="border rounded-md p-1 border-slate-800 focus:outline-none hover:bg-opacity-80" onChange={handleChange} id="p" />
-          <button type="submit" className="text-white font-semibold text-sm  bg-slate-700 p-2 rounded-md border border-gray-300 hover:opacity-60">sign in</button>
+          <button type="submit" className="text-white font-semibold text-sm  bg-slate-700 p-2 rounded-md border border-gray-300 hover:opacity-60" disabled={loading}>{loading ? "loading..." : "Sign in"}</button>
         </form>
         <div className="text-sm flex mx-auto text-red-500 gap-2">
           <span>Don't have an account?</span>
