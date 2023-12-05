@@ -40,7 +40,8 @@ export const SignInController = async(req,res,next) => {
                 else{
                     //res.status(200).json("user logged in succesfully"); cannot multiple responses
                     const token = jwt.sign({id:validUser._id},process.env.JWT_AUTH_KEY);
-                    res.cookie("access_token",token,{httpOnly:true}).status(201).json(validUser); 
+                    const {Password:pignore,PhoneNumber:pnoignore,...rest} = validUser._doc
+                    res.cookie("access_token",token,{httpOnly:true}).status(201).json(rest); 
                 } 
             }
     }
