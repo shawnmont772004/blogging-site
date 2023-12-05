@@ -34,18 +34,18 @@ const SignIn = () => {
     if(data.success === false)
     {
       setLoading(false);
-;      return setError(data.message);
-      
+      return setError(data.message); 
     }
     navg('/');
-    return setError(null);
     setLoading(false);
+    return setError(null);
+    
     
    }
    catch(error)
    {
-    return setError(error.message);
     setLoading(false);
+    return setError(error.message);
    }
 
   }
