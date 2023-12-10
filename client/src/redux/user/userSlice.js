@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState ={
     currentUser:null,
     loading:false,
-    error:false
+    error:null
 };
 
 const userSlice=createSlice(
     {
-        name:"user_reducers",
+        name:"user_reducer",
         initialState,
         reducers: {
             signInStart : (state) =>{
