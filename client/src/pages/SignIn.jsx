@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInFailure, signInStart, signInSuccess } from '../redux/user/userSlice.js';
 const SignIn = () => {
 
   const [formData, setFormData] = useState();
-  const [error,setError]=useState(null);
-  const [loading, setLoading]=useState(false);
+  //const [error,setError]=useState(null);
+  //const [loading, setLoading]=useState(false);
+  const { loading , error } = useSelector((state)=>state.userss);
+  const disp= useDispatch();
 
   const navg=useNavigate();
 
@@ -17,7 +21,8 @@ const SignIn = () => {
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
-    setLoading(true);
+    //setLoading(true);
+    disp(signInStart());
     console.log(formData);
 
    try{
@@ -33,19 +38,24 @@ const SignIn = () => {
     
     if(data.success === false)
     {
-      setLoading(false);
-      return setError(data.message); 
+      //setLoading(false);
+      //return setError(data.message);
+      disp(signInFailure(data.message));
+      return;
     }
     navg('/');
-    setLoading(false);
-    return setError(null);
+    //setLoading(false);
+    //return setError(null);
+    disp(signInSuccess(data));
     
     
    }
    catch(error)
    {
-    setLoading(false);
-    return setError(error.message);
+    //setLoading(false);
+    //return setError(error.message);
+    disp(signInFailure(error.message));
+    return;
    }
 
   }
