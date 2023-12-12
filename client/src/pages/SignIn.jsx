@@ -36,7 +36,7 @@ const SignIn = () => {
     });
 
     const data = await res.json(); //if there is an error 
-    
+    console.log(data);
     if(data.success === false)
     {
       //setLoading(false);
