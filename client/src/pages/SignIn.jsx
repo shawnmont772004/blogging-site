@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInFailure, signInStart, signInSuccess } from '../redux/user/userSlice.js';
 import OAuth from '../components/OAuth.jsx';
@@ -74,7 +74,7 @@ const SignIn = () => {
         </form>
         <div className="text-sm flex mx-auto text-red-500 gap-2">
           <span>Don't have an account?</span>
-          <span className="underline">sign up</span>
+          <Link to="/sign-up"><span className="underline">sign up</span></Link>
         </div>
         <div className="flex mx-auto mb-4">{error && <p className="text-red-700 text-sm ">{error}</p>}</div>
         

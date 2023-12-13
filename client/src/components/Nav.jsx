@@ -9,7 +9,7 @@ const Nav = () => {
             <ul className="flex md:gap-24 gap-8 text-lg ">
                 <Link to="/"><li className="hover:bg-white hover:text-slate-900 p-2 border rounded-md">Home</li></Link>
                 <Link to="/about"><li className="hover:bg-white hover:text-slate-900 p-2 border rounded-md hidden md:block">About</li></Link>
-                <Link to="/sign-up"><li className="hover:bg-white hover:text-slate-900 p-2 border rounded-md">Sign-up</li></Link>    
+                <Link to="/sign-in"><li className="hover:bg-white hover:text-slate-900 p-2 border rounded-md">Sign-in</li></Link>    
             </ul>
         </div>
     </div>
