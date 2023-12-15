@@ -8,6 +8,7 @@ import About from './pages/About.jsx'
 import Profile from './pages/Profile.jsx'
 
 import Nav from "./components/Nav.jsx"
+import PrivateRouter from './components/PrivateRouter.jsx'
 
 const App = () => {
   return (
@@ -19,7 +20,9 @@ const App = () => {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/about" element={<About />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route element={<PrivateRouter />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
           <Route path="*" element={()=>{console.log("error 404 not found")}} />
 
 
